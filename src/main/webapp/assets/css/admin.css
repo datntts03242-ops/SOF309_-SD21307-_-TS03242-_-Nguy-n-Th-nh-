@@ -1,0 +1,146 @@
+/* ================================================================
+   SU MON — ADMIN PANEL STYLES
+   Inherits design tokens from style.css
+================================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --adm-sidebar-w: 252px;
+    --adm-header-h: 64px;
+    --adm-bg: #F0F2F5;
+    --adm-dark: #111827;
+    --adm-blue: #1e3a8a;
+    --adm-gold: #D4A017;
+    --adm-red: #A50000;
+    --adm-surface: #FFFFFF;
+    --adm-border: #E5E7EB;
+    --adm-muted: #6B7280;
+    --adm-text: #111827;
+    --adm-ease: cubic-bezier(.4,0,.2,1);
+    --adm-t: .25s var(--adm-ease);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Be Vietnam Pro', system-ui, sans-serif; background: var(--adm-bg); color: var(--adm-text); }
+
+/* ── SCROLLBAR ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f3f4f6; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+
+/* ── SIDEBAR ───────────────────────────────────────────────── */
+.sidebar {
+    width: var(--adm-sidebar-w); height: 100vh;
+    background: var(--adm-dark); position: fixed; left: 0; top: 0;
+    z-index: 100; display: flex; flex-direction: column;
+    transition: left var(--adm-t);
+    box-shadow: 4px 0 24px rgba(0,0,0,.15);
+}
+/* Desktop: ẩn sidebar khi bấm toggle */
+.sidebar.hidden { left: calc(-1 * var(--adm-sidebar-w)); }
+
+.logo {
+    padding: 1.4rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,.07);
+    display: flex; align-items: center; gap: .75rem; flex-shrink: 0;
+}
+.logo img { height: 36px; }
+.logo h4 { font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0; letter-spacing: .02em; }
+.logo small { font-size: .72rem; color: rgba(255,255,255,.4); display: block; margin-top: 1px; }
+
+.sidebar ul { list-style: none; padding: .75rem 0; flex: 1; overflow-y: auto; }
+.sidebar li { margin: 2px .5rem; }
+.sidebar a {
+    color: rgba(255,255,255,.68); display: flex; align-items: center; gap: .65rem;
+    text-decoration: none; padding: .7rem .9rem; border-radius: 10px;
+    font-size: .875rem; font-weight: 500; transition: var(--adm-t);
+}
+.sidebar a:hover { background: rgba(255,255,255,.08); color: #fff; }
+.sidebar a.active { background: var(--adm-blue); color: #fff; font-weight: 600; box-shadow: 0 4px 12px rgba(30,58,138,.35); }
+.sidebar i { width: 20px; text-align: center; font-size: .95rem; flex-shrink: 0; }
+
+/* ── MAIN CONTENT ──────────────────────────────────────────── */
+.admin-wrapper { display: flex; }
+.main-content {
+    margin-left: var(--adm-sidebar-w);
+    flex: 1; min-height: 100vh;
+    transition: margin-left var(--adm-t);
+}
+/* Desktop: khi sidebar bị ẩn */
+.sidebar.hidden { left: calc(-1 * var(--adm-sidebar-w)); }
+.main-content.full { margin-left: 0; }
+
+/* ── HEADER ────────────────────────────────────────────────── */
+.header {
+    background: var(--adm-surface); height: var(--adm-header-h); padding: 0 1.75rem;
+    display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 1px 0 var(--adm-border), 0 2px 8px rgba(0,0,0,.04);
+    position: sticky; top: 0; z-index: 50;
+}.menu-btn { background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--adm-text); padding: .4rem; border-radius: 8px; transition: var(--adm-t); position: relative; z-index: 10; }
+.menu-btn:hover { background: var(--adm-bg); }
+.page-title { font-size: 1.35rem; font-weight: 700; color: var(--adm-blue); margin: 0; }
+
+/* ── CONTENT AREA ──────────────────────────────────────────── */
+.content { padding: 1.75rem; }
+
+/* ── DASHBOARD CARDS ───────────────────────────────────────── */
+.dashboard-card {
+    background: var(--adm-surface); border-radius: 14px; padding: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06); border: 1px solid var(--adm-border);
+    transition: var(--adm-t); position: relative; overflow: hidden;
+}
+.dashboard-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--adm-blue), var(--adm-gold)); }
+.dashboard-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,.1); }
+.dashboard-card h6 { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--adm-muted); margin-bottom: .35rem; }
+.dashboard-card h2 { font-size: 2.2rem; font-weight: 800; color: var(--adm-text); line-height: 1; margin: 0; }
+.dashboard-card i { font-size: 2.2rem; color: var(--adm-blue); opacity: .8; }
+
+/* ── CARDS ─────────────────────────────────────────────────── */
+.top-card, .table-card {
+    background: var(--adm-surface); border-radius: 14px; padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06); border: 1px solid var(--adm-border);
+    margin-bottom: 1.5rem;
+}
+
+/* ── TABLE ─────────────────────────────────────────────────── */
+.table { font-size: .875rem; }
+.table thead th {
+    background: var(--adm-blue); color: #fff !important; font-weight: 600; font-size: .78rem;
+    text-transform: uppercase; letter-spacing: .06em; border: none; padding: .9rem 1rem;
+}
+.table tbody tr { border-bottom: 1px solid var(--adm-border); transition: background var(--adm-t); }
+.table tbody tr:hover { background: #f9fafb; }
+.table td { padding: .85rem 1rem; vertical-align: middle; border: none; color: #111827; }
+.table img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; border: 1px solid var(--adm-border); }
+.preview { width: 110px; height: 130px; object-fit: cover; border-radius: 10px; border: 1px solid var(--adm-border); }
+
+/* ── BUTTONS ───────────────────────────────────────────────── */
+.btn-action { width: 34px; height: 34px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; font-size: .85rem; transition: var(--adm-t); border: none; cursor: pointer; }
+
+/* ── MODAL ─────────────────────────────────────────────────── */
+.modal-header { background: var(--adm-blue); color: #fff; border-radius: 14px 14px 0 0; padding: 1.1rem 1.5rem; }
+.modal-content { border-radius: 14px; border: none; box-shadow: 0 24px 64px rgba(0,0,0,.2); }
+.modal-title { font-weight: 700; font-size: 1rem; }
+
+/* ── FORM CONTROLS ─────────────────────────────────────────── */
+.form-control, .form-select {
+    border-radius: 8px; border: 1.5px solid var(--adm-border); font-size: .875rem;
+    padding: .6rem .9rem; transition: var(--adm-t);
+}
+.form-control:focus, .form-select:focus {
+    border-color: var(--adm-blue); box-shadow: 0 0 0 3px rgba(30,58,138,.1); outline: none;
+}
+.form-label { font-size: .82rem; font-weight: 600; color: #374151; margin-bottom: .35rem; }
+
+/* ── BADGES ────────────────────────────────────────────────── */
+.badge { font-size: .72rem; font-weight: 600; padding: .35rem .7rem; border-radius: 6px; }
+
+/* ── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 991px) {
+    .sidebar { left: calc(-1 * var(--adm-sidebar-w)); }
+    .sidebar.active { left: 0; }
+    .main-content { margin-left: 0; }
+    .main-content.active { margin-left: var(--adm-sidebar-w); }
+}
